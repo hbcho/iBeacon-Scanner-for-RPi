@@ -21,10 +21,10 @@ class Beacon:
 
 	def __str__(self):
 		string = "-------------\n"
-		string += "\tUDID: ", self.uuid
-		string += "\tMAC address: ", self.mac
-		string += "\tMAJOR: ", self.major
-		string += "\tMINOR: ", self.minor
-		string += "\t(Unknown):", self.txpower
-		string += "\tRSSI:", self.rssi
+		string += "\tUDID: " + self.uuid
+		string += "\tMAC address: " + self.mac
+		string += "\tMAJOR: " + str(self.major)
+		string += "\tMINOR: " + str(self.minor)
+		string += "\t(Unknown): " + str(self.txpower)
+		string += "\tRSSI:" + str(self.rssi)
 		return string

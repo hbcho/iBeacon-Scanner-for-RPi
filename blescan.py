@@ -171,7 +171,7 @@ def parse_events(sock, loop_count=100):
 					txp = struct.unpack("b", pkt[report_pkt_offset -2])
 					rssi = struct.unpack("b", pkt[report_pkt_offset -1])
 
-					beac = beacon(uuid,mac,major,minor,txp,rssi)
+					beac = Beacon(uuid,mac,major,minor,txp,rssi)
 
 					"""Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 					Adstring += ","
