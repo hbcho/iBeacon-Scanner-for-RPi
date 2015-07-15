@@ -29,6 +29,6 @@ class Beacon:
 		string += "\tRSSI:" + str(self.rssi)
 		return string
 
-	def addMACadr(mac):
+	def addMACadr(self,mac):
 		if not mac in self.macs:
 			self.macs.append(mac)
