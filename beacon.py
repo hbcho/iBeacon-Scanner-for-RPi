@@ -22,11 +22,13 @@ class Beacon:
 	def __str__(self):
 		string = "-------------\n"
 		string += "\tUDID: " + self.uuid
-		string += "\tMAC address: " + self.macs
 		string += "\tMAJOR: " + str(self.major)
 		string += "\tMINOR: " + str(self.minor)
 		string += "\t(Unknown): " + str(self.txpower)
 		string += "\tRSSI:" + str(self.rssi)
+		string += "\tMAC address: "
+		for mac in self.macs:
+			string += mac + ","
 		return string
 
 	def addMACadr(self,mac):
