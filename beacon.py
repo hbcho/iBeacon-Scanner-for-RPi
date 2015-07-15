@@ -20,10 +20,11 @@ class Beacon:
 		self.rssi = rssi
 
 	def __str__(self):
-		print "-------------"
-		print "\tUDID: ", self.uuid
-		print "\tMAC address: ", self.mac
-		print "\tMAJOR: ", self.major
-		print "\tMINOR: ", self.minor
-		print "\t(Unknown):", self.txpower
-		print "\tRSSI:", self.rssi
+		string = "-------------\n"
+		string += "\tUDID: ", self.uuid
+		string += "\tMAC address: ", self.mac
+		string += "\tMAJOR: ", self.major
+		string += "\tMINOR: ", self.minor
+		string += "\t(Unknown):", self.txpower
+		string += "\tRSSI:", self.rssi
+		return string
