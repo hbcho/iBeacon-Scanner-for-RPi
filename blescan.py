@@ -167,7 +167,7 @@ def parse_events(sock, loop_count=100):
 					txp = struct.unpack("b", pkt[report_pkt_offset -2])
 					rssi = struct.unpack("b", pkt[report_pkt_offset -1])
 
-					beac =  { "uuid" : uuid, "mac" : mac, "major" : major, "minor" : minor, "txp" : txp, "rssi" : rssi)
+					beac =  { "uuid" : uuid, "mac" : mac, "major" : major, "minor" : minor, "txp" : txp, "rssi" : rssi}
 
 					myFullList.append(beac);
 				done = True

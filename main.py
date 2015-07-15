@@ -24,7 +24,8 @@ returnedList = blescan.parse_events(sock, 10)
 
 print "----------"
 for beac in returnedList:
-	if beac.uuid in allBeacons:
+	print beac
+	if beac['uuid'] in allBeacons:
 		pass
 	else:
 		b = Beacon(beac.uuid,beac.mac,beac.major,beac.minor,beac.txp,beac.rssi)
