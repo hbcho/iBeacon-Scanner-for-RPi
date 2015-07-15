@@ -35,6 +35,7 @@ while True:
 		else:
 			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
 			allBeacons[uuid] = b
-			
+
+	sys.stdout.flush();
 	for bee in allBeacons:
 		print allBeacons[bee]
