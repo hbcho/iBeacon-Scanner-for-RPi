@@ -1,7 +1,7 @@
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
 
-DEBUG = True
+DEBUG = False
 # BLE scanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # BLE scanner, based on https://code.google.com/p/pybluez/source/browse/trunk/examples/advanced/inquiry-with-rssi.py
 
@@ -19,7 +19,6 @@ import os
 import sys
 import struct
 import bluetooth._bluetooth as bluez
-from beacon import Beacon
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -155,15 +154,12 @@ def parse_events(sock, loop_count=100):
 						print "\tMINOR: ", printpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
 						print "\tMAC address: ", packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 						# commented out - don't know what this byte is.  It's NOT TXPower
-
 						txpower, = struct.unpack("b", pkt[report_pkt_offset -2])
 						print "\t(Unknown):", txpower
-
 						rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
 						print "\tRSSI:", rssi
 
-					# build the return string
-
+					# build the Beacon dict
 					uuid = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
 					mac = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 					major = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
@@ -171,21 +167,8 @@ def parse_events(sock, loop_count=100):
 					txp = struct.unpack("b", pkt[report_pkt_offset -2])
 					rssi = struct.unpack("b", pkt[report_pkt_offset -1])
 
-					beac = Beacon(uuid,mac,major,minor,txp,rssi)
+					beac =  { "uuid" : uuid, "mac" : mac, "major" : major, "minor" : minor, "txp" : txp, "rssi" : rssi)
 
-					"""Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-					Adstring += ","
-					Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
-					Adstring += ","
-					Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
-					Adstring += ","
-					Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
-					Adstring += ","
-					Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
-					Adstring += ","
-					Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
-
-					#print "\tAdstring=", Adstring"""
 					myFullList.append(beac);
 				done = True
 

@@ -6,6 +6,9 @@ import sys
 
 import bluetooth._bluetooth as bluez
 
+
+allBeacons = []
+
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)

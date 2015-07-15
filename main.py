@@ -5,7 +5,9 @@ import blescan
 import sys
 
 import bluetooth._bluetooth as bluez
+from beacon import Beacon
 
+allBeacons = {}
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)
@@ -22,4 +24,10 @@ returnedList = blescan.parse_events(sock, 10)
 
 print "----------"
 for beac in returnedList:
-	print beac
+	if beac.uuid in allBeacons:
+		pass
+	else:
+		b = Beacon(beac.uuid,beac.mac,beac.major,beac.minor,beac.txp,beac.rssi)
+		allBeacons[beac.uuid] = b
+
+print allBeacons
