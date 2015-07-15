@@ -13,6 +13,7 @@ class Beacon:
 
 	def __init__(self,uuid,mac,major,minor,txpower,rssi):
 		self.uuid = uuid
+		self.macs = []
 		self.macs.append(mac);
 		self.major = major
 		self.minor = minor
