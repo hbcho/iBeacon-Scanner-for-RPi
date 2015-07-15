@@ -32,5 +32,7 @@ class Beacon:
 		return string
 
 	def addMACadr(self,mac):
-		if not mac in self.macs:
+		if mac in self.macs:
+			pass
+		else:
 			self.macs.append(mac)

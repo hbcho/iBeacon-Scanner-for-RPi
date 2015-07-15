@@ -29,7 +29,6 @@ while True:
 		#print beac
 		uuid = beac['uuid']
 		if uuid in allBeacons:
-			print "UUID is already registerd update only"
 			b = allBeacons[uuid]
 			b.addMACadr(beac['mac'])
 		else:
