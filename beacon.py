@@ -5,7 +5,7 @@ class Beacon:
 
 	""" private vars """
 	uuid = "N/A"
-	mac = "00:00:00:00:00:00"
+	macs = []
 	major = 0
 	minor = 0
 	txpower = 0
@@ -13,7 +13,7 @@ class Beacon:
 
 	def __init__(self,uuid,mac,major,minor,txpower,rssi):
 		self.uuid = uuid
-		self.mac = mac
+		self.macs.append(mac);
 		self.major = major
 		self.minor = minor
 		self.txpower = txpower
@@ -22,9 +22,13 @@ class Beacon:
 	def __str__(self):
 		string = "-------------\n"
 		string += "\tUDID: " + self.uuid
-		string += "\tMAC address: " + self.mac
+		string += "\tMAC address: " + self.macs
 		string += "\tMAJOR: " + str(self.major)
 		string += "\tMINOR: " + str(self.minor)
 		string += "\t(Unknown): " + str(self.txpower)
 		string += "\tRSSI:" + str(self.rssi)
 		return string
+
+	def addMACadr(mac):
+		if not mac in self.macs:
+			self.macs.append(mac)
