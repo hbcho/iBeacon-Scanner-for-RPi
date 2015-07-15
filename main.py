@@ -20,16 +20,21 @@ except:
 blescan.hci_le_set_scan_parameters(sock)
 blescan.hci_enable_le_scan(sock)
 
-returnedList = blescan.parse_events(sock, 10)
 
-print "----------"
-for beac in returnedList:
-	#print beac
-	uuid = beac['uuid']
-	if uuid in allBeacons:
-		pass
-	else:
-		b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
-		allBeacons[uuid] = b
 
-print allBeacons
+
+while True:
+	returnedList = blescan.parse_events(sock, 10)
+	for beac in returnedList:
+		#print beac
+		uuid = beac['uuid']
+		if uuid in allBeacons:
+			print "UUID is already registerd update only"
+			b = allBeacons[uuid]
+			b.addMACadr(beac['mac'])
+		else:
+			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
+			allBeacons[uuid] = b
+			
+	for bee in allBeacons:
+		print allBeacons[bee]
