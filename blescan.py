@@ -19,6 +19,7 @@ import os
 import sys
 import struct
 import bluetooth._bluetooth as bluez
+import beacon
 
 LE_META_EVENT = 0x3e
 LE_PUBLIC_ADDRESS=0x00
@@ -162,7 +163,17 @@ def parse_events(sock, loop_count=100):
 						print "\tRSSI:", rssi
 
 					# build the return string
-					Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+
+					uuid = returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
+					mac = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+					major = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
+					minor = returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
+					txp = struct.unpack("b", pkt[report_pkt_offset -2])
+					rssi = struct.unpack("b", pkt[report_pkt_offset -1])
+
+					beac = beacon(uuid,mac,major,minor,txp,rssi)
+
+					"""Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 					Adstring += ","
 					Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
 					Adstring += ","
@@ -174,8 +185,8 @@ def parse_events(sock, loop_count=100):
 					Adstring += ","
 					Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
 
-					#print "\tAdstring=", Adstring
-					myFullList.append(Adstring)
+					#print "\tAdstring=", Adstring"""
+					myFullList.append(beac);
 				done = True
 
 	sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
