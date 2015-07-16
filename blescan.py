@@ -128,8 +128,9 @@ def parse_events(sock, loop_count=100):
 	myFullList = []
 	for i in range(0, loop_count):
 		pkt = sock.recv(255)
-		print "Iteration " + str(i)
-		printpacket(pkt)
+		if DEBUG == True:
+			print "Iteration " + str(i)
+			printpacket(pkt)
 		ptype, event, plen = struct.unpack("BBB", pkt[:3])
 
 		#print "--------------"

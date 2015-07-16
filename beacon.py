@@ -29,7 +29,7 @@ class Beacon:
 		string += "\tRSSI:" + str(self.rssi)
 		string += "\tMAC address: "
 		if len(self.macs) > 1:
-			string += len(self.macs)
+			string += str(len(self.macs))
 		else:
 			string += self.macs[0]
 
