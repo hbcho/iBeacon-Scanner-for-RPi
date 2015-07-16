@@ -169,8 +169,8 @@ def parse_events(sock, loop_count=100):
 					mac = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 					major = returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
 					minor = returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2])
-					txp = struct.unpack("b", pkt[report_pkt_offset -2])
-					rssi = struct.unpack("b", pkt[report_pkt_offset -1])
+					txp, = struct.unpack("b", pkt[report_pkt_offset -2])
+					rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
 
 					beac =  { 'uuid' : uuid, 'mac' : mac, 'major' : major, 'minor' : minor, 'txp' : txp, 'rssi' : rssi}
 
