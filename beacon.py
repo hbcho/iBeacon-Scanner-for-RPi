@@ -25,8 +25,9 @@ class Beacon:
 		string += "\tUDID: " + self.uuid
 		string += "\tMAJOR: " + str(self.major)
 		string += "\tMINOR: " + str(self.minor)
-		string += "\t(Unknown): " + str(self.txpower)
-		string += "\tRSSI:" + str(self.rssi)
+		string += "\tDIST: " + str(self.getDistance)
+		#string += "\t(Unknown): " + str(self.txpower)
+		#string += "\tRSSI:" + str(self.rssi)
 		string += "\tMAC address: "
 		if len(self.macs) > 1:
 			string += str(len(self.macs))
@@ -40,3 +41,18 @@ class Beacon:
 			pass
 		else:
 			self.macs.append(mac)
+
+	def updateData(self,txp,rssi):
+		self.txp = txp
+		self.rssi = rssi
+
+
+	def getDistance(self):
+		if self.rssi == 0:
+			return -1.0
+
+		ratio = self.rssi * 1.0 / self.txpower
+		if ratio < 1.0:
+			return ratio**10
+		else:
+			return 0.89976*ratio**7.7095 + 0.111

@@ -31,6 +31,7 @@ while True:
 		if uuid in allBeacons:
 			b = allBeacons[uuid]
 			b.addMACadr(beac['mac'])
+			b.updateData(beac['txp'],beac['rssi'])
 		else:
 			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
 			allBeacons[uuid] = b
