@@ -25,7 +25,7 @@ class Beacon:
 		string += "\tUDID: " + self.uuid
 		string += "\tMAJOR: " + str(self.major)
 		string += "\tMINOR: " + str(self.minor)
-		string += "\tDIST: " + str(self.getDistance)
+		string += "\tDIST: " + str(self.getDistance())
 		#string += "\t(Unknown): " + str(self.txpower)
 		#string += "\tRSSI:" + str(self.rssi)
 		string += "\tMAC address: "
