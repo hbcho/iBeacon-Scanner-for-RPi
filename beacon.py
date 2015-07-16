@@ -51,8 +51,12 @@ class Beacon:
 		if self.rssi == 0:
 			return -1.0
 
+		print type(self.rssi)
+
+		"""
 		ratio = self.rssi * 1.0 / self.txpower
 		if ratio < 1.0:
 			return ratio**10
 		else:
 			return 0.89976*ratio**7.7095 + 0.111
+		"""
