@@ -28,8 +28,8 @@ class Beacon:
 		string += "\t(Unknown): " + str(self.txpower)
 		string += "\tRSSI:" + str(self.rssi)
 		string += "\tMAC address: "
-		if len(macs) > 1:
-			string += len(macs)
+		if len(self.macs) > 1:
+			string += len(self.macs)
 		else:
 			string += self.macs[0]
 
