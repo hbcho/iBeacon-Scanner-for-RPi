@@ -28,8 +28,11 @@ class Beacon:
 		string += "\t(Unknown): " + str(self.txpower)
 		string += "\tRSSI:" + str(self.rssi)
 		string += "\tMAC address: "
-		for mac in self.macs:
-			string += mac + ","
+		if len(macs) > 1:
+			string += len(macs)
+		else:
+			string += self.macs[0]
+
 		return string
 
 	def addMACadr(self,mac):
