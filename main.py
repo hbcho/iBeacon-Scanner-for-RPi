@@ -40,5 +40,5 @@ while True:
 
 		allBeacons[uuid] = beac
 
-	with open('beacons.json','w') as of:
+	with open('/home/pi/iBeacon-Scanner-/beacons.json','w') as of:
 		json.dump(allBeacons,of)
