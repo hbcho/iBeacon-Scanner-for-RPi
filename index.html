@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>iBeaconScanner</title>
+</head>
+<body>
+	<ul id="beaconlist">
+
+
+	</ul>
+</body>
+<script type="text/javascript">
+	function getJson() {
+		var blist = document.getElementById('beaconlist');
+		fetch('/beacons.json').then(function(data) {
+			return data.json();
+			//console.log(data);
+		}).then(function(json) {
+			for (var key in json) {
+				var li = document.getElementById(key);
+				if(li !== null) {
+					li.innerHTML = key + " --- " + json[key].major;
+				} else {
+					li = document.createElement('li');
+					li.setAttribute('id',key);
+					li.innerHTML = key + " --- " + json[key].major;
+					blist.appendChild(li);
+				}
+				//console.log(json[key].uuid);
+			}
+		});
+		//console.log('update');
+		setTimeout(getJson,1000);
+	}
+
+
+	getJson();
+</script>
+</html>
