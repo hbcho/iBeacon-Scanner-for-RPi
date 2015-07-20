@@ -42,3 +42,5 @@ while True:
 
 	with open('/home/pi/iBeacon-Scanner-/beacons.json','w') as of:
 		json.dump(allBeacons,of)
+
+	sleep(1)
