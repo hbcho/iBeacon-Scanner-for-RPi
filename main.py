@@ -3,7 +3,7 @@
 
 import blescan
 import sys
-import pickle
+import json
 
 import bluetooth._bluetooth as bluez
 from beacon import Beacon
@@ -41,7 +41,5 @@ while True:
 	"""for bee in allBeacons:
 		print allBeacons[bee]"""
 
-	output = open('allbeacons.txt','wb+')
-
-	pickle.dump(allBeacons,output)
-	output.close()
+	with open('beacons.json','w') as of:
+		json.dump(allBeacons,of)
