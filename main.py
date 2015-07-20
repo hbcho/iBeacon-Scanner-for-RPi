@@ -3,6 +3,7 @@
 
 import blescan
 import sys
+import pickle
 
 import bluetooth._bluetooth as bluez
 from beacon import Beacon
@@ -36,6 +37,11 @@ while True:
 			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
 			allBeacons[uuid] = b
 
-	sys.stdout.flush()
-	for bee in allBeacons:
-		print allBeacons[bee]
+
+	"""for bee in allBeacons:
+		print allBeacons[bee]"""
+
+	output = open('allbeacons.txt','wb+')
+
+	pickle.dump(allBeacons,output)
+	output.close()
