@@ -39,9 +39,5 @@ while True:
 		
 		allBeacons[uuid] = beac
 
-
-	"""for bee in allBeacons:
-		print allBeacons[bee]"""
-
 	with open('beacons.json','w') as of:
 		json.dump(allBeacons,of)
