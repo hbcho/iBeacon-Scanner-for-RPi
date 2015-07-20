@@ -11,9 +11,9 @@
 ### END INIT INFO
 
 # Change the next 3 lines to suit where you install your script and what you want to call it
-DIR=/usr/local/bin/scanbeacon
+DIR=/home/pi/iBeacon-Scanner-
 DAEMON=$DIR/main.py
-DAEMON_NAME=scanbeaon
+DAEMON_NAME=scanbeacon
 
 # Add any command line options for your daemon here
 DAEMON_OPTS=""

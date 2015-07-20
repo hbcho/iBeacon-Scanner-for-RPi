@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # test BLE Scanning software
 # koki 15072015
 
@@ -36,7 +37,7 @@ while True:
 		else:
 			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
 			allBeacons[uuid] = b"""
-		
+
 		allBeacons[uuid] = beac
 
 	with open('beacons.json','w') as of:
