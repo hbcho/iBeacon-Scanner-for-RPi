@@ -29,13 +29,15 @@ while True:
 	for beac in returnedList:
 		#print beac
 		uuid = beac['uuid']
-		if uuid in allBeacons:
+		"""if uuid in allBeacons:
 			b = allBeacons[uuid]
 			b.addMACadr(beac['mac'])
 			b.updateData(beac['txp'],beac['rssi'])
 		else:
 			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
-			allBeacons[uuid] = b
+			allBeacons[uuid] = b"""
+		
+		allBeacons[uuid] = beac
 
 
 	"""for bee in allBeacons:
