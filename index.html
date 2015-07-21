@@ -35,15 +35,32 @@
 			for (var key in json) {
 				var li = document.getElementById(key);
 				if(li !== null) {
-					li.innerHTML = key + " --- " + json[key].major + "--- LU: " + d;
+					li.innerHTML = key + " --- " + getDistance(json[key].rssi,json[key].txp) + "--- LU: " + d ;
 				} else {
 					li = document.createElement('li');
 					li.setAttribute('id',key);
-					li.innerHTML = key + " --- " + json[key].major + "--- LU: " + d;
+					li.innerHTML = key + " --- " + getDistance(json[key].rssi,json[key].txp) + "--- LU: " + d ;
 					blist.appendChild(li);
 				}
 			}
 		});
+	}
+
+	function getDistance(rssi,txpower) {
+		if(rssi === 0) {
+			return -1.0
+		}
+
+		if(txpower === 0) {
+			return -1.0
+		}
+
+		var ratio = rssi / txpower;
+		if(ratio < 1) {
+			return Math.pow(ratio,10);
+		} else {
+			return 0.89976*Math.pow(ratio,7.7095) + 0.111;
+		}
 	}
 
 	var startBtn = document.getElementById('startscan');
