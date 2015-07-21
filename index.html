@@ -19,7 +19,7 @@
 	var beacons = {};
 	function getJson() {
 
-		fetch('/beacons.json').then(function(data) {
+		fetch('/v1/beacons').then(function(data) {
 			//console.log(data);
 			if(data.ok) {
 				try {
@@ -49,6 +49,11 @@
 				}
 			}
 			output();
+		}).catch(function(error) {
+			console.warn('Error during fetch',error);
+			clearInterval(getJsonInterval);
+			getJsonInterval = null;
+			console.log('Stop Scan');
 		});
 	}
 
@@ -57,7 +62,7 @@
 			var b = beacons[key];
 			var d = new Date().getTime();
 
-			if(d - b.lu < 10000) {
+			if(d - b.lu < 20000) {
 				var avgRssi = 0;
 				b.rssi.forEach(function(item) {
 					avgRssi += item;
@@ -80,9 +85,9 @@
 					blist.appendChild(li);
 				}
 			} else {
-				var li = document.getElementById(key);
-				li.innerHTML = "XXXXXXXXX" + li.innerHTML;
 				delete beacons[key];
+				var li = document.getElementById(key);
+
 
 			}
 	}
