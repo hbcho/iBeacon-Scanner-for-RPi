@@ -85,10 +85,9 @@
 					blist.appendChild(li);
 				}
 			} else {
-				delete beacons[key];
 				var li = document.getElementById(key);
-
-
+				delete beacons[key];
+				blist.removeChild(li);
 			}
 	}
 }
