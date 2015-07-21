@@ -3,12 +3,18 @@
 	<title>iBeaconScanner</title>
 </head>
 <body>
+	<header>
+		<p> # of Beacons: <span id="beaconcount">0</span></p>
+		<button id="startscan">Start Scan</button>
+		<button id="stopscan">Stop Scan</button>
+	</header>
 	<ul id="beaconlist">
 
 
 	</ul>
 </body>
 <script type="text/javascript">
+	var getJsonInterval = null;
 	function getJson() {
 		var blist = document.getElementById('beaconlist');
 		fetch('/beacons.json').then(function(data) {
@@ -25,14 +31,21 @@
 					li.innerHTML = key + " --- " + json[key].major;
 					blist.appendChild(li);
 				}
-				//console.log(json[key].uuid);
 			}
 		});
-		//console.log('update');
 		setTimeout(getJson,1000);
 	}
 
-
-	getJson();
+	var startBtn = document.getElementById('startscan');
+	var stopBtn = document.getElementById('stopscan');
+	startBtn.addEventListener('click',function() {
+		console.log('Start Scan');
+		getJsonInterval = setInterval(getJson,1000);
+	},false);
+	stopBtn.addEventListener('click',function() {
+		console.log('Stop Scan');
+		clearInterval(getJsonInterval);
+		getJsonInterval = null;
+	});
 </script>
 </html>
