@@ -15,10 +15,10 @@
 </body>
 <script type="text/javascript">
 	var getJsonInterval = null;
-
+	var blist = document.getElementById('beaconlist');
 	var beacons = {};
 	function getJson() {
-		var blist = document.getElementById('beaconlist');
+
 		fetch('/beacons.json').then(function(data) {
 			//console.log(data);
 			if(data.ok) {
@@ -32,11 +32,11 @@
 				console.warn('Error while fetching JSON');
 			}
 		}).then(function(json) {
-			var date = new Date();
-			var d = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+			var date = new Date().getTime();
+			//var d = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 			for (var key in json) {
 				if(beacons[key] === undefined) {
-					beacons[key] = {rssi:[],txp:[]};
+					beacons[key] = {rssi:[],txp:[],lu:date};
 				}
 				var b = beacons[key];
 				b.rssi.unshift(json[key].rssi);
@@ -47,7 +47,17 @@
 				if(b.txp.length > 10) {
 					b.txp.pop();
 				}
+			}
+			output();
+		});
+	}
 
+	function output() {
+		for (var key in beacons) {
+			var b = beacons[key];
+			var d = new Date().getTime();
+
+			if(d - b.lu < 10000) {
 				var avgRssi = 0;
 				b.rssi.forEach(function(item) {
 					avgRssi += item;
@@ -62,16 +72,21 @@
 
 				var li = document.getElementById(key);
 				if(li !== null) {
-					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp) + "--- LU: " + d ;
+					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp);
 				} else {
 					li = document.createElement('li');
 					li.setAttribute('id',key);
-					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp) + "--- LU: " + d ;
+					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp);
 					blist.appendChild(li);
 				}
+			} else {
+				var li = document.getElementById(key);
+				li.innerHTML = "XXXXXXXXX" + li.innerHTML;
+				delete beacons[key];
+
 			}
-		});
 	}
+}
 
 	function getDistance(rssi,txpower) {
 		if(rssi === 0) {
