@@ -9,7 +9,6 @@ import json
 import bluetooth._bluetooth as bluez
 from beacon import Beacon
 
-allBeacons = {}
 dev_id = 0
 try:
 	sock = bluez.hci_open_dev(dev_id)
@@ -27,20 +26,10 @@ blescan.hci_enable_le_scan(sock)
 
 while True:
 	returnedList = blescan.parse_events(sock, 10)
+	allbs = {}
 	for beac in returnedList:
-		#print beac
 		uuid = beac['uuid']
-		"""if uuid in allBeacons:
-			b = allBeacons[uuid]
-			b.addMACadr(beac['mac'])
-			b.updateData(beac['txp'],beac['rssi'])
-		else:
-			b = Beacon(uuid,beac['mac'],beac['major'],beac['minor'],beac['txp'],beac['rssi'])
-			allBeacons[uuid] = b"""
-
-		allBeacons[uuid] = beac
+		allbs[uuid] = beac
 
 	with open('/home/pi/iBeacon-Scanner-/beacons.json','w') as of:
-		json.dump(allBeacons,of)
-
-	sleep(1)
+		json.dump(allbs,of)
