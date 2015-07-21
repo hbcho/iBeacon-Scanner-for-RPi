@@ -29,7 +29,8 @@ while True:
 	allbs = {}
 	for beac in returnedList:
 		uuid = beac['uuid']
-		allbs[uuid] = beac
+		if not uuid.startswith('0613ff4c'):
+			allbs[uuid] = beac
 
 	with open('/home/pi/iBeacon-Scanner-/beacons.json','w') as of:
 		json.dump(allbs,of)
