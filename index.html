@@ -15,6 +15,8 @@
 </body>
 <script type="text/javascript">
 	var getJsonInterval = null;
+
+	var beacons = {};
 	function getJson() {
 		var blist = document.getElementById('beaconlist');
 		fetch('/beacons.json').then(function(data) {
@@ -33,13 +35,38 @@
 			var date = new Date();
 			var d = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 			for (var key in json) {
+				if(beacons[key] === undefined) {
+					beacons[key] = {rssi:[],txp:[]};
+				}
+				var b = beacons[key];
+				b.rssi.unshift(json[key].rssi);
+				if(b.rssi.length > 10) {
+					b.rssi.pop();
+				}
+				b.txp.unshift(json[key].txp);
+				if(b.txp.length > 10) {
+					b.txp.pop();
+				}
+
+				var avgRssi = 0;
+				b.rssi.forEach(function(item) {
+					avgRssi += item;
+				});
+				avgRssi = avgRssi / b.rssi.length;
+
+				var avgTxp = 0;
+				b.txp.forEach(function(item) {
+					avgTxp += item;
+				});
+				avgTxp = avgTxp / b.txp.length;
+
 				var li = document.getElementById(key);
 				if(li !== null) {
-					li.innerHTML = key + " --- " + getDistance(json[key].rssi,json[key].txp) + "--- LU: " + d ;
+					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp) + "--- LU: " + d ;
 				} else {
 					li = document.createElement('li');
 					li.setAttribute('id',key);
-					li.innerHTML = key + " --- " + getDistance(json[key].rssi,json[key].txp) + "--- LU: " + d ;
+					li.innerHTML = key + " --- " + getDistance(avgRssi,avgTxp) + "--- LU: " + d ;
 					blist.appendChild(li);
 				}
 			}
