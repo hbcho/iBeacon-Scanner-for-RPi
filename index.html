@@ -18,9 +18,14 @@
 	function getJson() {
 		var blist = document.getElementById('beaconlist');
 		fetch('/beacons.json').then(function(data) {
-			console.log(data);
+			//console.log(data);
 			if(data.ok) {
-				return data.json();
+				try {
+					return data.json();
+				} catch(e) {
+					console.warn('Could not return JSON');
+				}
+
 			} else {
 				console.warn('Error while fetching JSON');
 			}
