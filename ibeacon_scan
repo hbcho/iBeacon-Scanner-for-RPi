@@ -30,6 +30,9 @@ if [[ $1 == "parse" ]]; then
 					RSSI=`echo "ibase=16; $RSSI" | bc`
 					RSSI=$[RSSI - 256]
 					MAC=`echo $MAC | sed 's/^\(.*\) \(.*\) \(.*\) \(.*\) \(.*\) \(.*\)/\6 \5 \4 \3 \2 \1/g'`
+
+					echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC" >> newbeacon.txt
+
 					if [[ $2 == "-b" ]]; then
 							 echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC"
 					else
