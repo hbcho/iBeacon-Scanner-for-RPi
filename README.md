@@ -14,4 +14,5 @@ Followed the instructions on http://www.jaredwolff.com/blog/get-started-with-blu
 sudo apt-get install python-bluez
 wget http://node-arm.herokuapp.com/node_latest_armhf.deb
 sudo dpkg -i node_latest_armhf.deb
+sudo apt-get install bc
 ```
