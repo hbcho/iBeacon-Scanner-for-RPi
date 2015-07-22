@@ -18,7 +18,7 @@ if [[ $1 == "parse" ]]; then
 					MAJOR=`echo $packet | sed 's/^.\{117\}\(.\{5\}\).*$/\1/'`
 					MINOR=`echo $packet | sed 's/^.\{123\}\(.\{5\}\).*$/\1/'`
 					POWER=`echo $packet | sed 's/^.\{129\}\(.\{2\}\).*$/\1/'`
-					MAC=`echo $packet | sed 's/^.\{24\}\(.\{17\}\).*$/\1/'`
+					MAC=`echo $packet | sed 's/^.\{21\}\(.\{17\}\).*$/\1/'`
 					UUID=`echo $UUID | sed -e 's/\ //g' -e 's/^\(.\{8\}\)\(.\{4\}\)\(.\{4\}\)\(.\{4\}\)\(.\{12\}\)$/\1-\2-\3-\4-\5/'`
 					MAJOR=`echo $MAJOR | sed 's/\ //g'`
 					MAJOR=`echo "ibase=16; $MAJOR" | bc`
@@ -29,6 +29,7 @@ if [[ $1 == "parse" ]]; then
 					RSSI=`echo $packet | sed 's/^.\{132\}\(.\{2\}\).*$/\1/'`
 					RSSI=`echo "ibase=16; $RSSI" | bc`
 					RSSI=$[RSSI - 256]
+					MAC=`echo $MAC | sed 's/^\(.*\) \(.*\) \(.*\) \(.*\) \(.*\) \(.*\)/\6 \5 \4 \3 \2 \1/g'`
 					if [[ $2 == "-b" ]]; then
 			echo "$UUID $MAJOR $MINOR $POWER $RSSI MAC"
 					else
