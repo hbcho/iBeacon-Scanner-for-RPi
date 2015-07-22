@@ -31,13 +31,13 @@ if [[ $1 == "parse" ]]; then
 					RSSI=$[RSSI - 256]
 					MAC=`echo $MAC | sed 's/^\(.*\) \(.*\) \(.*\) \(.*\) \(.*\) \(.*\)/\6 \5 \4 \3 \2 \1/g'`
 
-					echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC" >> newbeacon.txt
+					echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC" > newbeacon
 
-					if [[ $2 == "-b" ]]; then
-							 echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC"
-					else
-							 echo "UUID: $UUID MAJOR: $MAJOR MINOR: $MINOR POWER: $POWER RSSI: $RSSI MAC: $MAC"
-					fi
+					#if [[ $2 == "-b" ]]; then
+					#		 echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC"
+					#else
+					#		 echo "UUID: $UUID MAJOR: $MAJOR MINOR: $MINOR POWER: $POWER RSSI: $RSSI MAC: $MAC"
+					#fi
 				fi
 				capturing=""
 				packet=""
