@@ -2,6 +2,13 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 
+var s = fs.createReadStream('newbeacon');
+
+s.on('data', function(b) {
+	console.log(b);
+});
+
+
 app.get('/',function(req,res) {
 	res.sendfile('index.html');
 });
