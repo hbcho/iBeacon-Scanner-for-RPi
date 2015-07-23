@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/roosnic1/iBeacon-Scanner-#readme",
   "dependencies": {
-    "express": "^4.13.1"
+    "express": "^4.13.1",
+    "play-sound": "0.0.5"
   }
 }
