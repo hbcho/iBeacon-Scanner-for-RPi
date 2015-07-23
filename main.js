@@ -10,7 +10,6 @@ var server = net.createServer(function(stream) {
 	});
 });
 
-
 function startListening() {
 	server.listen('/tmp/ibeacon.sock');
 }
