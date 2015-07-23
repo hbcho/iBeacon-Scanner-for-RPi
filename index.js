@@ -21,7 +21,7 @@ app.get('/',function(req,res) {
 
 app.get('/v1/beacons',function(req,res) {
 	res.setHeader('Content-Type','application/json');
-	res.send(JSON.stringify(beacons));
+	res.send(beacons);
 });
 
 function startListening() {

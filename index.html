@@ -35,6 +35,7 @@
 			var date = new Date().getTime();
 			//var d = date.getHours() + ":"  + date.getMinutes() + ":" + date.getSeconds();
 			for (var key in json) {
+				console.log(json[key]);
 				if(beacons[key] === undefined) {
 					beacons[key] = {rssi:[],txp:[],lu:date};
 				}
