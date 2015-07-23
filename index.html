@@ -39,11 +39,11 @@
 					beacons[key] = {rssi:[],txp:[],lu:date};
 				}
 				var b = beacons[key];
-				b.rssi.unshift(json[4]);
+				b.rssi.unshift(json[key][4]);
 				if(b.rssi.length > 10) {
 					b.rssi.pop();
 				}
-				b.txp.unshift(json[5]);
+				b.txp.unshift(json[key][5]);
 				if(b.txp.length > 10) {
 					b.txp.pop();
 				}
