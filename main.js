@@ -1,13 +1,16 @@
-var child = require('child_process'),
-		fs = require('fs');
+var net = require('net');
 
-var myREPL = child.spawn('node'),
-		myStream = fs.createReadStream('newbeacon');
-
-//myREPL.stdout.pipe(process.stdout, {end: false});
-
-myStream.on('data', function(b) {
-	console.log(b);
+var server = net.createServer(function(stream) {
+	stream.on('data', function(c) {
+		console.log('data:', c.toString());
+	});
+	stream.on('end', function() {
+		server.close();
+	});
 });
 
-process.stdin.resume();
+server.listen('/tmp/test.sock');
+
+var stream = net.connect('/tmp/test.sock');
+stream.write('hello');
+stream.end();
