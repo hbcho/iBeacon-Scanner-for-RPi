@@ -5,12 +5,14 @@ var server = net.createServer(function(stream) {
 		console.log('data:', c.toString());
 	});
 	stream.on('end', function() {
-		server.close();
+		startListening();
+		//server.close();
 	});
 });
 
-server.listen('/tmp/test.sock');
 
-var stream = net.connect('/tmp/test.sock');
-stream.write('hello');
-stream.end();
+function startListening() {
+	server.listen('/tmp/ibeacon.sock');
+}
+
+startListening();

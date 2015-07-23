@@ -31,7 +31,7 @@ if [[ $1 == "parse" ]]; then
 					RSSI=$[RSSI - 256]
 					MAC=`echo $MAC | sed 's/^\(.*\) \(.*\) \(.*\) \(.*\) \(.*\) \(.*\)/\6 \5 \4 \3 \2 \1/g'`
 
-					echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC" > newbeacon
+					echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC" | nc -U /tmp/ibeacon.sock
 
 					#if [[ $2 == "-b" ]]; then
 					#		 echo "$UUID, $MAJOR, $MINOR, $POWER, $RSSI, $MAC"
