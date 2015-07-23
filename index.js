@@ -7,7 +7,7 @@ var server = net.createServer(function(stream) {
 	stream.on('data', function(c) {
 		//console.log('data:', c.toString());
 		var beacs = c.toString().split(',');
-		beacons[beacs[0]] = c.tostring();
+		beacons[beacs[0]] = beacs;
 	});
 	stream.on('end', function() {
 		startListening();

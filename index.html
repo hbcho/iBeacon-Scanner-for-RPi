@@ -33,17 +33,17 @@
 			}
 		}).then(function(json) {
 			var date = new Date().getTime();
-			//var d = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+			//var d = date.getHours() + ":"  + date.getMinutes() + ":" + date.getSeconds();
 			for (var key in json) {
 				if(beacons[key] === undefined) {
 					beacons[key] = {rssi:[],txp:[],lu:date};
 				}
 				var b = beacons[key];
-				b.rssi.unshift(json[key].rssi);
+				b.rssi.unshift(json[4]);
 				if(b.rssi.length > 10) {
 					b.rssi.pop();
 				}
-				b.txp.unshift(json[key].txp);
+				b.txp.unshift(json[5]);
 				if(b.txp.length > 10) {
 					b.txp.pop();
 				}
