@@ -37,6 +37,7 @@ function playSound() {
 	playSoundTimeout = null;
 	var play = false;
 	for(var key in beacons) {
+		console.log(beacons[key]);
 		if(beacons[key][6] < 1) {
 			play = true;
 		}
