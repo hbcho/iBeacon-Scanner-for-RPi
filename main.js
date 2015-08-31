@@ -1,5 +1,5 @@
 var net = require('net');
-var player = require('play-sound');
+//var player = require('play-sound');
 
 var lastTimePlayed = 0;
 var beacons = {};
@@ -18,9 +18,9 @@ var server = net.createServer(function(stream) {
 		beacs[5] = beacs.replace(/ /g,'-');
 		beacs[6] = getDistance(beacs[4],beacs[3]);
 		beacons[beacs[0] + "_" +  beacs[5]] = beacs;
-		if(playSoundTimeout === null) {
+		/*if(playSoundTimeout === null) {
 			playSound();
-		}
+		}*/
 	});
 	stream.on('end', function() {
 		startListening();
