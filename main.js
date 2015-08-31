@@ -9,11 +9,15 @@ var pUuid = '53657272-616E-6574-6761-000000000000';
 
 var server = net.createServer(function(stream) {
 	stream.on('data', function(c) {
-		//console.log('data:', c.toString());
-		var beacs = c.toString().split(',');
+		console.log('data:', c.toString());
+		var beacs = c.toString().split(',')
+		if(beacs === undefined) {
+			console.log('Can not split input data');
+			return;
+		}
 
 		// exit if not proper iBeacon
-		if(beacs[0].indexOf(pUuid) < 0) return;
+		//if(beacs[0].indexOf(pUuid) < 0) return;
 
 		beacs[5] = beacs.replace(/ /g,'-');
 		beacs[6] = getDistance(beacs[4],beacs[3]);
