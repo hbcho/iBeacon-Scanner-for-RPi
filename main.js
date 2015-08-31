@@ -11,17 +11,22 @@ var server = net.createServer(function(stream) {
 	stream.on('data', function(c) {
 		console.log('data:', c.toString());
 		var beacs = c.toString().split(',')
-		if(beacs === undefined) {
-			console.log('Can not split input data');
+		if(beacs.length < 5) {
+			console.log('Not a proper input string');
 			return;
 		}
 
 		// exit if not proper iBeacon
 		//if(beacs[0].indexOf(pUuid) < 0) return;
+		try {
+			beacs[5] = beacs[5].replace(/ /g,'-');
+			beacs[6] = getDistance(beacs[4],beacs[3]);
+			beacons[beacs[0] + "_" +  beacs[5]] = beacs;
+		} catch(e) {
+			console.log('Error during data');
+			console.log(e);
+		}
 
-		beacs[5] = beacs.replace(/ /g,'-');
-		beacs[6] = getDistance(beacs[4],beacs[3]);
-		beacons[beacs[0] + "_" +  beacs[5]] = beacs;
 		/*if(playSoundTimeout === null) {
 			playSound();
 		}*/
